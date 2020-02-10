@@ -1,0 +1,2 @@
+# cssGridLayout_CursoEnPlatzi
+Voy a poner en practica todo lo que aprendi de cssGridLayout en el curso de platzi usando valores, propiedades y combinarlos. El layout de un curso  en platzi es un reto mas grande ya que tiene una particularidad muy bonita y es varios componentes de la interfaz es de carater dinamico y otro es de caracter fijo. También cuenta con responsive design pero cambia el orden de sus componentes totalmente 
