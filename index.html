@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,30 +9,57 @@
     <title>Layout de los cursos de platzi</title>
     <!-- Es hora de agregar estilos en el documento con la eiqueta style -->
     <style>
-        body{
+        body {
             font-family: 'Lato', sans-serif;
             margin: 0;
         }
+
         /* A nuestro padre */
-        .hero{
+        .hero {
             background: #23475b;
             color: white;
             padding: 32px 15px;
+            display: grid;
+            grid-template-columns: minmax(auto, 1024px);
+            justify-content: center;
         }
-        .title{
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 70px 1fr 320px;
+            grid-template-areas: "badge title form"
+                ". description form"
+                ". countdown form";
+            gap: 10px;
+
+        }
+
+        .badge {
+            grid-area: badge;
+        }
+
+        .badge img {
+            max-width: 70px;
+        }
+
+        .title {
+            grid-area: title;
             font-size: 36px;
             font-weight: normal;
             margin: 0;
             display: flex;
             align-items: center;
         }
-        .form{
+
+        .form {
+            grid-area: form;
             text-align: center;
-            background: rgba(255,255,255,.9);
+            background: rgba(255, 255, 255, .9);
             padding: 1.5em;
             border-radius: 10px;
         }
-        .form input{
+
+        .form input {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -41,11 +69,12 @@
             margin-bottom: 10px;
         }
 
-        .form p{
+        .form p {
             font-size: 20px;
             color: #3a3b3f;
             margin-bottom: 1em;
         }
+
         .form button {
             background: #98ca3f;
             color: white;
@@ -54,39 +83,94 @@
             border: none;
             font-size: 16px;
             border-bottom: 5px solid #6d932b;
-            display: inline-block; /* para que el text-align que tiene el padre form me pueda centrar el botton */
+            display: inline-block;
+            /* para que el text-align que tiene el padre form me pueda centrar el botton */
+        }
+
+        .description {
+            grid-area: description;
+        }
+
+        .countdown {
+            grid-area: countdown;
+        }
+
+        .countdown p {
+            font-size: 20px;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        .countdown p {
+            font-size: 33px;
+        }
+
+        /* En nuestro countdown hsata el momento no hay ningun elemento entre los numeros, necesitamos algun separador para ordenar el elemento, usando pseudo-elementos que nos agregan contenido al DOM */
+
+        .countdown span:after {
+            /*pseudoElemento :after*/
+            content: ":";
+            /*Contenido del pseudoElemento*/
+            display: inline-block;
+            margin: 0, 5px;
+        }
+
+        .countdown span:last-child:after {
+            display: none;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 70px 1fr;
+                grid-template-areas: "badge title"
+                                     "description description"
+                                     "form form"
+                                     "countdown countdown";
+            }
         }
     </style>
 </head>
 <!-- El layout de los cursos de platzi, es bastante interezante por que aunque podemos recrearlo con flows, inlineblocks, bootstrap o fundation, en algunas situaciones queda un poco corto debido a sus mismos componentes.El grid actual de la pagina no es tan flexible y maleable como quisieramos. Pero  -->
+
 <body>
     <!-- Vamos a ocuparnos primero del contenido empezando por nuestro hero -->
     <div class="hero">
-    <!-- Luego el contenido de la seccion principal  -->
-    <div class="badge">
-        <img src="badge.png" alt=""> <!--medallita del curso -->
-    </div>
-    <h1 class="title">Curso de React.js</h1>
-    
-    <div class="description">
-        <p>React es una de las librerías más utilizadas hoy en día para crear aplicaciones web. En este curso podrás dominar la creación de aplicaciones a través de un proyecto que te ayudará a explotar todas las capacidades de esta librería.</p>
-    </div>
-    <form action="" class="form"> <!-- Formulario -->
-        <p>Resgistrate a Platzi</p>
-        <input type="text" placeholder="Nombre">
-        <input type="email" placeholder="Correo Electronico">
-        <button type="submit">Comienza ahora </button>
-    </form>
-    <div class="countdown">
-        <p>Lanzamiento:</p>
-        <p>
-            <!-- Es una manera de poner elementos en linea de una manera sencilla solo con html puedo poner un parrafo, este parrafo puede estar llenos de span porque se van a poner un elemento al costado del otro -->
-            <span>01d</span>
-            <span>03h</span>
-            <span>09m</span>
-            <span>05s</span>
-        </p>
+        <!-- Luego el contenido de la seccion principal  -->
+        <div class="hero-container">
+            <div class="badge">
+                <img src="badge.png" alt="">
+                <!--medallita del curso -->
+            </div>
+            <h1 class="title">Curso de React.js</h1>
+
+            <div class="description">
+                <p>React es una de las librerías más utilizadas hoy en día para crear aplicaciones web. En este curso
+                    podrás dominar la creación de aplicaciones a través de un proyecto que te ayudará a explotar todas
+                    las capacidades de esta librería.</p>
+            </div>
+            <form action="" class="form">
+                <!-- Formulario -->
+                <p>Resgistrate a Platzi</p>
+                <input type="text" placeholder="Nombre">
+                <input type="email" placeholder="Correo Electronico">
+                <button type="submit">Comienza ahora </button>
+            </form>
+            <div class="countdown">
+                <p>Lanzamiento:</p>
+                <p>
+                    <!-- Es una manera de poner elementos en linea de una manera sencilla solo con html puedo poner un parrafo, este parrafo puede estar llenos de span porque se van a poner un elemento al costado del otro -->
+                    <span>01d</span>
+                    <span>03h</span>
+                    <span>09m</span>
+                    <span>05s</span>
+                </p>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
